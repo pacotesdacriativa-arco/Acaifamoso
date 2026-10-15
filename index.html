@@ -53,31 +53,6 @@
       color: var(--yellow-accent);
     }
 
-    /* Frete Grátis Bar */
-    .shipping-bar {
-      background-color: var(--purple-dark);
-      color: white;
-      padding: 10px 15px;
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .progress-bg {
-      background: rgba(255, 255, 255, 0.2);
-      height: 8px;
-      border-radius: 4px;
-      margin-top: 6px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      background: var(--yellow-accent);
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -121,7 +96,7 @@
       gap: 8px;
     }
 
-    /* Card de Produto Horizontal (Foto na Esquerda, Info no Meio, Botão na Direita) */
+    /* Card de Produto Horizontal */
     .product-card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -382,26 +357,16 @@
   <!-- Header -->
   <header>
     <div class="logo-container">
-      <!-- Mude o src para a imagem da sua logo salva no Github -->
       <img src="logo.png" alt="Famoso Açaí Logo">
     </div>
     <h1>Famoso Açaí</h1>
   </header>
-
-  <!-- Barra de Entrega Grátis -->
-  <div class="shipping-bar">
-    <span id="shipping-text">Adicione R$ 50,00 para ter Entrega Grátis!</span>
-    <div class="progress-bg">
-      <div class="progress-fill" id="shipping-progress"></div>
-    </div>
-  </div>
 
   <div class="container">
 
     <!-- Carrossel de Promoções -->
     <div class="carousel-container">
       <div class="carousel-track" id="carousel-track">
-        <!-- Mude o src para as fotos das promoções no Github -->
         <div class="carousel-slide"><img src="promocao-3-por-2.jpg" alt="3 Açaís pelo preço de 2"></div>
         <div class="carousel-slide"><img src="promocao-entrega-gratis.jpg" alt="Entrega Grátis acima de 50"></div>
         <div class="carousel-slide"><img src="promocao-brinde.jpg" alt="Levando 3 ganha brinde"></div>
@@ -412,33 +377,30 @@
     <h2 class="section-title"> Monte Seu Açaí</h2>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do copo de 300ml no Github -->
       <img src="foto-acai-300ml.jpg" alt="Açaí 300ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 300 ml</div>
-        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
         <div class="product-price">R$ 10,00</div>
       </div>
       <button class="btn-add" onclick="openBuildModal('300ml', 10.00)">+</button>
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do copo de 500ml no Github -->
       <img src="foto-acai-500ml.jpg" alt="Açaí 500ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 500 ml</div>
-        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
         <div class="product-price">R$ 15,00</div>
       </div>
       <button class="btn-add" onclick="openBuildModal('500ml', 15.00)">+</button>
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do copo de 700ml no Github -->
       <img src="foto-acai-700ml.jpg" alt="Açaí 700ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 700 ml</div>
-        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
         <div class="product-price">R$ 20,00</div>
       </div>
       <button class="btn-add" onclick="openBuildModal('700ml', 20.00)">+</button>
@@ -449,7 +411,6 @@
     <h2 class="section-title"> Açaís Prontos da Casa</h2>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Açaí dos Famosos no Github -->
       <img src="foto-acai-famosos.jpg" alt="Açaí dos Famosos" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí dos Famosos (500ml)</div>
@@ -460,7 +421,6 @@
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Açaí Chocolatudo no Github -->
       <img src="foto-acai-chocolatudo.jpg" alt="Açaí Chocolatudo" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí Chocolatudo (500ml)</div>
@@ -471,7 +431,6 @@
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Açaí Tropical no Github -->
       <img src="foto-acai-tropical.jpg" alt="Açaí Tropical" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí Tropical (500ml)</div>
@@ -482,7 +441,6 @@
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Açaí Supremo Nutella no Github -->
       <img src="foto-acai-nutella.jpg" alt="Açaí Supremo Nutella" class="product-img">
       <div class="product-info">
         <div class="product-title">Supremo Nutella (500ml)</div>
@@ -497,7 +455,6 @@
     <h2 class="section-title"> Fondue de Frutas</h2>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Fondue Pequeno no Github -->
       <img src="foto-fondue-pequeno.jpg" alt="Fondue Pequeno" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Pequeno</div>
@@ -508,7 +465,6 @@
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Fondue Médio no Github -->
       <img src="foto-fondue-medio.jpg" alt="Fondue Médio" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Médio</div>
@@ -519,7 +475,6 @@
     </div>
 
     <div class="product-card">
-      <!-- Mude o src para a foto do Fondue Grande no Github -->
       <img src="foto-fondue-grande.jpg" alt="Fondue Grande" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Grande</div>
@@ -548,9 +503,7 @@
         <span class="modal-title" id="build-title">Montar Açaí</span>
         <button class="close-btn" onclick="closeModal('build-modal')">&times;</button>
       </div>
-      <div id="build-body">
-        <!-- Conteúdo do formulário inserido via JavaScript -->
-      </div>
+      <div id="build-body"></div>
       <button class="btn-submit" onclick="addCustomAcaiToCart()">Adicionar ao Carrinho</button>
     </div>
   </div>
@@ -563,9 +516,7 @@
         <span class="modal-title" id="fondue-title">Montar Fondue</span>
         <button class="close-btn" onclick="closeModal('fondue-modal')">&times;</button>
       </div>
-      <div id="fondue-body">
-        <!-- Conteúdo do Fondue via JavaScript -->
-      </div>
+      <div id="fondue-body"></div>
       <button class="btn-submit" onclick="addFondueToCart()">Adicionar Fondue ao Carrinho</button>
     </div>
   </div>
@@ -602,7 +553,7 @@
           </select>
         </div>
 
-        <!-- CAMPOS DE ENDEREÇO (Mostra/Esconde) -->
+        <!-- CAMPOS DE ENDEREÇO -->
         <div id="delivery-fields">
           <div class="form-row">
             <div class="form-group" style="flex: 2;">
@@ -686,8 +637,8 @@
     // DADOS FIXOS
     const freeAddonsList = ["Paçoca", "M&m", "Leite em pó", "Leite condensado", "Tubetes", "Bala de goma", "Bala fini", "Sucrilhos", "Amendoim triturado", "Granola", "Chocoboll"];
     const freeFruitsList = ["Manga", "Banana", "Morango", "Abacaxi", "Pêssego", "Uva", "Kiwi"];
-    const syrupsList = ["Avelã", "Ninho", "Paçoca", "Chocolate ao leite", "Chocolate amargo", "Chocolate branco"];
-    const toppingsList = ["Morango", "Chocolate", "Caramelo"];
+    const syrupsList = ["Sem Calda", "Avelã", "Ninho", "Paçoca", "Chocolate ao leite", "Chocolate amargo", "Chocolate branco"];
+    const toppingsList = ["Sem Cobertura", "Morango", "Chocolate", "Caramelo"];
 
     const paidAddonsList = [
       { name: "Nutella", price: 5.00 },
@@ -737,21 +688,21 @@
         </div>
 
         <div class="option-group">
-          <div class="group-header">Caldas</div>
-          ${syrupsList.map(item => `
+          <div class="group-header">Escolha 1 Calda <span class="limit-badge">(Apenas 1)</span></div>
+          ${syrupsList.map((item, idx) => `
             <label class="checkbox-item">
               <span>${item}</span>
-              <input type="checkbox" name="syrup" value="${item}">
+              <input type="radio" name="syrup" value="${item}" ${idx === 0 ? 'checked' : ''}>
             </label>
           `).join('')}
         </div>
 
         <div class="option-group">
-          <div class="group-header">Cobertura</div>
-          ${toppingsList.map(item => `
+          <div class="group-header">Escolha 1 Cobertura <span class="limit-badge">(Apenas 1)</span></div>
+          ${toppingsList.map((item, idx) => `
             <label class="checkbox-item">
               <span>${item}</span>
-              <input type="checkbox" name="topping" value="${item}">
+              <input type="radio" name="topping" value="${item}" ${idx === 0 ? 'checked' : ''}>
             </label>
           `).join('')}
         </div>
@@ -792,8 +743,9 @@
       const cupuacu = document.querySelector('input[name="cupuacu"]:checked').value;
       const freeAddons = Array.from(document.querySelectorAll('input[name="free-addon"]:checked')).map(cb => cb.value);
       const freeFruits = Array.from(document.querySelectorAll('input[name="free-fruit"]:checked')).map(cb => cb.value);
-      const syrups = Array.from(document.querySelectorAll('input[name="syrup"]:checked')).map(cb => cb.value);
-      const toppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => cb.value);
+      
+      const syrup = document.querySelector('input[name="syrup"]:checked').value;
+      const topping = document.querySelector('input[name="topping"]:checked').value;
       
       const paidAddonIndexes = Array.from(document.querySelectorAll('input[name="paid-addon"]:checked')).map(cb => parseInt(cb.value));
       
@@ -813,8 +765,8 @@
           `Base: ${cupuacu}`,
           freeAddons.length ? `Grátis: ${freeAddons.join(', ')}` : '',
           freeFruits.length ? `Frutas: ${freeFruits.join(', ')}` : '',
-          syrups.length ? `Caldas: ${syrups.join(', ')}` : '',
-          toppings.length ? `Coberturas: ${toppings.join(', ')}` : '',
+          syrup !== "Sem Calda" ? `Calda: ${syrup}` : '',
+          topping !== "Sem Cobertura" ? `Cobertura: ${topping}` : '',
           paidAddonsNames.length ? `Pagos: ${paidAddonsNames.join(', ')}` : ''
         ].filter(Boolean).join(' | ')
       });
@@ -914,25 +866,13 @@
       renderCartItems();
     }
 
-    // ATUALIZAR INTERFACE DO CARRINHO E FRETE
+    // ATUALIZAR INTERFACE DO CARRINHO
     function updateCartUI() {
       const count = cart.length;
       const total = cart.reduce((sum, item) => sum + item.price, 0);
 
       document.getElementById('cart-count').innerText = `${count} ${count === 1 ? 'item selecionado' : 'itens selecionados'}`;
       document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
-
-      // Barra de Frete Grátis (R$ 50,00)
-      const target = 50.00;
-      const percentage = Math.min((total / target) * 100, 100);
-      document.getElementById('shipping-progress').style.width = `${percentage}%`;
-
-      if (total >= target) {
-        document.getElementById('shipping-text').innerText = "Parabéns! Você ganhou Entrega Grátis! 🎉";
-      } else {
-        const remaining = target - total;
-        document.getElementById('shipping-text').innerText = `Adicione mais R$ ${remaining.toFixed(2)} para Entrega Grátis!`;
-      }
     }
 
     function openCartModal() {
@@ -1026,9 +966,7 @@
 
       msg += `\n💰 *VALOR TOTAL:* R$ ${total.toFixed(2)}`;
       
-      if (total >= 50.00 && type === 'Entrega') {
-        msg += `\n🎉 *PROMOÇÃO:* Entrega Grátis Garantida!`;
-      } else if (type === 'Entrega') {
+      if (type === 'Entrega') {
         msg += `\n🛵 *Taxa de entrega:* A combinar via chat`;
       }
 
