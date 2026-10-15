@@ -29,28 +29,34 @@
       padding-bottom: 110px;
     }
 
-    /* Header */
+    /* Header com Logo Compactada */
     header {
       background-color: var(--purple-main);
       color: white;
       text-align: center;
-      padding: 15px 10px;
+      padding: 12px 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
     }
 
     .logo-container img {
-      max-width: 140px;
-      height: auto;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--yellow-accent);
     }
 
     header h1 {
-      font-size: 1.4rem;
-      margin-top: 5px;
+      font-size: 1.2rem;
       color: var(--yellow-accent);
+      margin: 0;
     }
 
     .container {
@@ -354,7 +360,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header com Logo -->
   <header>
     <div class="logo-container">
       <img src="IMG_1186.jpeg" alt="Famoso Açaí Logo">
@@ -367,9 +373,9 @@
     <!-- Carrossel de Promoções -->
     <div class="carousel-container">
       <div class="carousel-track" id="carousel-track">
-        <div class="carousel-slide"><img src="promocao-3-por-2.jpg" alt="3 Açaís pelo preço de 2"></div>
-        <div class="carousel-slide"><img src="promocao-entrega-gratis.jpg" alt="Entrega Grátis acima de 50"></div>
-        <div class="carousel-slide"><img src="promocao-brinde.jpg" alt="Levando 3 ganha brinde"></div>
+        <div class="carousel-slide"><img src="IMG_1200.jpeg" alt="3 Açaís pelo preço de 2"></div>
+        <div class="carousel-slide"><img src="IMG_1202.jpeg" alt="Entrega Grátis"></div>
+        <div class="carousel-slide"><img src="IMG_1201.jpeg" alt="Levando 3 ganha brinde"></div>
       </div>
     </div>
 
@@ -377,7 +383,7 @@
     <h2 class="section-title"> Monte Seu Açaí</h2>
 
     <div class="product-card">
-      <img src="foto-acai-300ml.jpg" alt="Açaí 300ml" class="product-img">
+      <img src="IMG_1206.jpeg" alt="Açaí 300ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 300 ml</div>
         <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
@@ -387,7 +393,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-acai-500ml.jpg" alt="Açaí 500ml" class="product-img">
+      <img src="IMG_1205.jpeg" alt="Açaí 500ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 500 ml</div>
         <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
@@ -397,7 +403,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-acai-700ml.jpg" alt="Açaí 700ml" class="product-img">
+      <img src="IMG_1204.jpeg" alt="Açaí 700ml" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí 700 ml</div>
         <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + 1 calda + 1 cobertura.</div>
@@ -411,7 +417,7 @@
     <h2 class="section-title"> Açaís Prontos da Casa</h2>
 
     <div class="product-card">
-      <img src="foto-acai-famosos.jpg" alt="Açaí dos Famosos" class="product-img">
+      <img src="IMG_1207.jpeg" alt="Açaí dos Famosos" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí dos Famosos (500ml)</div>
         <div class="product-desc">Açaí, Morango, Banana, Leite em Pó, Leite Condensado e Paçoca.</div>
@@ -421,7 +427,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-acai-chocolatudo.jpg" alt="Açaí Chocolatudo" class="product-img">
+      <img src="IMG_1208.jpeg" alt="Açaí Chocolatudo" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí Chocolatudo (500ml)</div>
         <div class="product-desc">Açaí, Chocoboll, M&M, Calda de Chocolate e Tubetes.</div>
@@ -431,7 +437,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-acai-tropical.jpg" alt="Açaí Tropical" class="product-img">
+      <img src="IMG_1209.jpeg" alt="Açaí Tropical" class="product-img">
       <div class="product-info">
         <div class="product-title">Açaí Tropical (500ml)</div>
         <div class="product-desc">Açaí, Kiwi, Manga, Abacaxi e Granola crocante.</div>
@@ -441,7 +447,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-acai-nutella.jpg" alt="Açaí Supremo Nutella" class="product-img">
+      <img src="IMG_1210.jpeg" alt="Açaí Supremo Nutella" class="product-img">
       <div class="product-info">
         <div class="product-title">Supremo Nutella (500ml)</div>
         <div class="product-desc">Açaí, Leite em Pó, Morango fresco e Generosa camada de Nutella.</div>
@@ -455,7 +461,7 @@
     <h2 class="section-title"> Fondue de Frutas</h2>
 
     <div class="product-card">
-      <img src="foto-fondue-pequeno.jpg" alt="Fondue Pequeno" class="product-img">
+      <img src="IMG_1212.jpeg" alt="Fondue Pequeno" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Pequeno</div>
         <div class="product-desc">Até 2 Frutas + 2 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
@@ -465,7 +471,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-fondue-medio.jpg" alt="Fondue Médio" class="product-img">
+      <img src="IMG_1213.jpeg" alt="Fondue Médio" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Médio</div>
         <div class="product-desc">Até 3 Frutas + 3 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
@@ -475,7 +481,7 @@
     </div>
 
     <div class="product-card">
-      <img src="foto-fondue-grande.jpg" alt="Fondue Grande" class="product-img">
+      <img src="IMG_1211.jpeg" alt="Fondue Grande" class="product-img">
       <div class="product-info">
         <div class="product-title">Fondue Grande</div>
         <div class="product-desc">Até 5 Frutas + 5 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
