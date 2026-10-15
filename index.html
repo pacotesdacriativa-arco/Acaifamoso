@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famoso Açaí - Cardápio Online</title>
+  <style>
+    :root {
+      --purple-main: #4A0E4E;
+      --purple-dark: #2D0530;
+      --yellow-accent: #FFC72C;
+      --green-accent: #2EB62C;
+      --bg-gray: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text-dark: #222222;
+      --text-muted: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-gray);
+      color: var(--text-dark);
+      padding-bottom: 110px;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--purple-main);
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container img {
+      max-width: 140px;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      margin-top: 5px;
+      color: var(--yellow-accent);
+    }
+
+    /* Frete Grátis Bar */
+    .shipping-bar {
+      background-color: var(--purple-dark);
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .progress-bg {
+      background: rgba(255, 255, 255, 0.2);
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--yellow-accent);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 15px;
+    }
+
+    /* Banner Carrossel */
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Títulos de Seção */
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--purple-main);
+      margin: 25px 0 12px 0;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--yellow-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Card de Produto Horizontal (Foto na Esquerda, Info no Meio, Botão na Direita) */
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .product-img {
+      width: 85px;
+      height: 85px;
+      border-radius: 10px;
+      object-fit: cover;
+      background-color: #eee;
+      flex-shrink: 0;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 4px 0;
+      line-height: 1.2;
+    }
+
+    .product-price {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green-accent);
+    }
+
+    .btn-add {
+      background-color: var(--yellow-accent);
+      color: var(--purple-dark);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .btn-add:active {
+      transform: scale(0.92);
+    }
+
+    /* Carrinho Fixo Inferior */
+    .cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--purple-main);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+      z-index: 99;
+      cursor: pointer;
+    }
+
+    .cart-bar-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-bar-title {
+      font-size: 0.9rem;
+      color: var(--yellow-accent);
+    }
+
+    .cart-bar-total {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .btn-view-cart {
+      background: var(--green-accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border: none;
+    }
+
+    /* Modais */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      border-radius: 20px 20px 0 0;
+      padding: 20px;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      color: var(--purple-main);
+      font-weight: bold;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    /* Estilos do Montador de Açaí */
+    .option-group {
+      margin-bottom: 15px;
+    }
+
+    .group-header {
+      font-weight: bold;
+      font-size: 0.95rem;
+      background: #f0f0f0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .limit-badge {
+      font-size: 0.8rem;
+      color: var(--purple-main);
+    }
+
+    .checkbox-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 4px;
+      border-bottom: 1px dashed #eee;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--purple-main);
+    }
+
+    /* Form do Checkout */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--green-accent);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-sub {
+      font-size: 0.78rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <!-- Mude o src para a imagem da sua logo salva no Github -->
+      <img src="logo.png" alt="Famoso Açaí Logo">
+    </div>
+    <h1>Famoso Açaí</h1>
+  </header>
+
+  <!-- Barra de Entrega Grátis -->
+  <div class="shipping-bar">
+    <span id="shipping-text">Adicione R$ 50,00 para ter Entrega Grátis!</span>
+    <div class="progress-bg">
+      <div class="progress-fill" id="shipping-progress"></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Carrossel de Promoções -->
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track">
+        <!-- Mude o src para as fotos das promoções no Github -->
+        <div class="carousel-slide"><img src="promocao-3-por-2.jpg" alt="3 Açaís pelo preço de 2"></div>
+        <div class="carousel-slide"><img src="promocao-entrega-gratis.jpg" alt="Entrega Grátis acima de 50"></div>
+        <div class="carousel-slide"><img src="promocao-brinde.jpg" alt="Levando 3 ganha brinde"></div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 1: MONTE SEU AÇAÍ -->
+    <h2 class="section-title"> Monte Seu Açaí</h2>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do copo de 300ml no Github -->
+      <img src="foto-acai-300ml.jpg" alt="Açaí 300ml" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí 300 ml</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-price">R$ 10,00</div>
+      </div>
+      <button class="btn-add" onclick="openBuildModal('300ml', 10.00)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do copo de 500ml no Github -->
+      <img src="foto-acai-500ml.jpg" alt="Açaí 500ml" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí 500 ml</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-price">R$ 15,00</div>
+      </div>
+      <button class="btn-add" onclick="openBuildModal('500ml', 15.00)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do copo de 700ml no Github -->
+      <img src="foto-acai-700ml.jpg" alt="Açaí 700ml" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí 700 ml</div>
+        <div class="product-desc">Monte do seu jeito! Até 5 adicionais grátis + 2 frutas grátis + caldas e coberturas.</div>
+        <div class="product-price">R$ 20,00</div>
+      </div>
+      <button class="btn-add" onclick="openBuildModal('700ml', 20.00)">+</button>
+    </div>
+
+
+    <!-- SEÇÃO 2: AÇAÍS PRONTOS DA CASA -->
+    <h2 class="section-title"> Açaís Prontos da Casa</h2>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Açaí dos Famosos no Github -->
+      <img src="foto-acai-famosos.jpg" alt="Açaí dos Famosos" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí dos Famosos (500ml)</div>
+        <div class="product-desc">Açaí, Morango, Banana, Leite em Pó, Leite Condensado e Paçoca.</div>
+        <div class="product-price">R$ 18,00</div>
+      </div>
+      <button class="btn-add" onclick="addReadyItem('Açaí dos Famosos (500ml)', 18.00)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Açaí Chocolatudo no Github -->
+      <img src="foto-acai-chocolatudo.jpg" alt="Açaí Chocolatudo" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí Chocolatudo (500ml)</div>
+        <div class="product-desc">Açaí, Chocoboll, M&M, Calda de Chocolate e Tubetes.</div>
+        <div class="product-price">R$ 19,00</div>
+      </div>
+      <button class="btn-add" onclick="addReadyItem('Açaí Chocolatudo (500ml)', 19.00)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Açaí Tropical no Github -->
+      <img src="foto-acai-tropical.jpg" alt="Açaí Tropical" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Açaí Tropical (500ml)</div>
+        <div class="product-desc">Açaí, Kiwi, Manga, Abacaxi e Granola crocante.</div>
+        <div class="product-price">R$ 17,00</div>
+      </div>
+      <button class="btn-add" onclick="addReadyItem('Açaí Tropical (500ml)', 17.00)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Açaí Supremo Nutella no Github -->
+      <img src="foto-acai-nutella.jpg" alt="Açaí Supremo Nutella" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Supremo Nutella (500ml)</div>
+        <div class="product-desc">Açaí, Leite em Pó, Morango fresco e Generosa camada de Nutella.</div>
+        <div class="product-price">R$ 23,00</div>
+      </div>
+      <button class="btn-add" onclick="addReadyItem('Supremo Nutella (500ml)', 23.00)">+</button>
+    </div>
+
+
+    <!-- SEÇÃO 3: FONDUES DE FRUTAS -->
+    <h2 class="section-title"> Fondue de Frutas</h2>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Fondue Pequeno no Github -->
+      <img src="foto-fondue-pequeno.jpg" alt="Fondue Pequeno" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Fondue Pequeno</div>
+        <div class="product-desc">Até 2 Frutas + 2 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
+        <div class="product-price">R$ 10,00</div>
+      </div>
+      <button class="btn-add" onclick="openFondueModal('Pequeno', 10.00, 2, 2)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Fondue Médio no Github -->
+      <img src="foto-fondue-medio.jpg" alt="Fondue Médio" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Fondue Médio</div>
+        <div class="product-desc">Até 3 Frutas + 3 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
+        <div class="product-price">R$ 20,00</div>
+      </div>
+      <button class="btn-add" onclick="openFondueModal('Médio', 20.00, 3, 3)">+</button>
+    </div>
+
+    <div class="product-card">
+      <!-- Mude o src para a foto do Fondue Grande no Github -->
+      <img src="foto-fondue-grande.jpg" alt="Fondue Grande" class="product-img">
+      <div class="product-info">
+        <div class="product-title">Fondue Grande</div>
+        <div class="product-desc">Até 5 Frutas + 5 Adicionais grátis + Escolha do Chocolate (Preto/Branco).</div>
+        <div class="product-price">R$ 35,00</div>
+      </div>
+      <button class="btn-add" onclick="openFondueModal('Grande', 35.00, 5, 5)">+</button>
+    </div>
+
+  </div>
+
+  <!-- Carrinho Fixo Rodapé -->
+  <div class="cart-bar" onclick="openCartModal()">
+    <div class="cart-bar-info">
+      <span class="cart-bar-title" id="cart-count">0 itens selecionados</span>
+      <span class="cart-bar-total" id="cart-total">R$ 0,00</span>
+    </div>
+    <button class="btn-view-cart">Ver carrinho</button>
+  </div>
+
+
+  <!-- MODAL DE MONTAGEM DO AÇAÍ -->
+  <div class="modal" id="build-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="build-title">Montar Açaí</span>
+        <button class="close-btn" onclick="closeModal('build-modal')">&times;</button>
+      </div>
+      <div id="build-body">
+        <!-- Conteúdo do formulário inserido via JavaScript -->
+      </div>
+      <button class="btn-submit" onclick="addCustomAcaiToCart()">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+
+
+  <!-- MODAL DE MONTAGEM DO FONDUE -->
+  <div class="modal" id="fondue-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="fondue-title">Montar Fondue</span>
+        <button class="close-btn" onclick="closeModal('fondue-modal')">&times;</button>
+      </div>
+      <div id="fondue-body">
+        <!-- Conteúdo do Fondue via JavaScript -->
+      </div>
+      <button class="btn-submit" onclick="addFondueToCart()">Adicionar Fondue ao Carrinho</button>
+    </div>
+  </div>
+
+
+  <!-- MODAL DO CARRINHO E CHECKOUT -->
+  <div class="modal" id="cart-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">Seu Pedido</span>
+        <button class="close-btn" onclick="closeModal('cart-modal')">&times;</button>
+      </div>
+
+      <div id="cart-items-list"></div>
+
+      <div style="margin: 15px 0; font-weight: bold; font-size: 1.1rem; text-align: right;" id="cart-modal-total">
+        Total: R$ 0,00
+      </div>
+
+      <!-- FORMULÁRIO DE ENTREGA / RETIRADA -->
+      <div style="border-top: 2px solid #eee; padding-top: 15px;">
+        <h3 style="font-size: 1rem; color: var(--purple-main); margin-bottom: 10px;">Dados da Entrega / Retirada</h3>
+
+        <div class="form-group">
+          <label>Nome Completo*</label>
+          <input type="text" id="cust-name" placeholder="Seu nome">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de Pedido*</label>
+          <select id="cust-type" onchange="toggleDeliveryFields()">
+            <option value="Entrega">Entrega (Delivery)</option>
+            <option value="Retirada">Retirar no Local</option>
+          </select>
+        </div>
+
+        <!-- CAMPOS DE ENDEREÇO (Mostra/Esconde) -->
+        <div id="delivery-fields">
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label>Rua*</label>
+              <input type="text" id="cust-street" placeholder="Nome da rua">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Número*</label>
+              <input type="text" id="cust-num" placeholder="Nº">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label>Bairro*</label>
+              <input type="text" id="cust-bairro" placeholder="Seu bairro">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Tipo</label>
+              <select id="cust-home-type">
+                <option value="Casa">Casa</option>
+                <option value="Apartamento">Apartamento</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label>Portaria?</label>
+              <select id="cust-portaria">
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Complemento</label>
+              <input type="text" id="cust-comp" placeholder="Bloco, apto...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ponto de Referência</label>
+            <input type="text" id="cust-ref" placeholder="Próximo a...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Forma de Pagamento*</label>
+          <select id="cust-pay">
+            <option value="Pix">Pix</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
+          </select>
+        </div>
+
+        <button class="btn-submit" style="background-color: var(--green-accent);" onclick="sendWhatsAppOrder()">
+           Enviar Pedido via WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- LÓGICA EM JAVASCRIPT -->
+  <script>
+    // CARROSSEL AUTOMÁTICO
+    let currentSlide = 0;
+    const track = document.getElementById('carousel-track');
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % 3;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }, 3500);
+
+    // ESTADO DO CARRINHO
+    let cart = [];
+    let currentBuildingAcai = null;
+    let currentBuildingFondue = null;
+
+    // DADOS FIXOS
+    const freeAddonsList = ["Paçoca", "M&m", "Leite em pó", "Leite condensado", "Tubetes", "Bala de goma", "Bala fini", "Sucrilhos", "Amendoim triturado", "Granola", "Chocoboll"];
+    const freeFruitsList = ["Manga", "Banana", "Morango", "Abacaxi", "Pêssego", "Uva", "Kiwi"];
+    const syrupsList = ["Avelã", "Ninho", "Paçoca", "Chocolate ao leite", "Chocolate amargo", "Chocolate branco"];
+    const toppingsList = ["Morango", "Chocolate", "Caramelo"];
+
+    const paidAddonsList = [
+      { name: "Nutella", price: 5.00 },
+      { name: "Paçoca Extra", price: 1.00 },
+      { name: "M&m Extra", price: 2.50 },
+      { name: "Leite em pó Extra", price: 2.00 },
+      { name: "Leite condensado Extra", price: 1.00 },
+      { name: "Tubetes Extra", price: 1.00 },
+      { name: "Bala de goma Extra", price: 1.50 },
+      { name: "Bala fini Extra", price: 3.00 },
+      { name: "Sucrilhos Extra", price: 1.00 },
+      { name: "Amendoim triturado Extra", price: 1.00 },
+      { name: "Granola Extra", price: 1.00 },
+      { name: "Chocoboll Extra", price: 1.50 }
+    ];
+
+    // MONTAGEM DO AÇAÍ CUSTOMIZADO
+    function openBuildModal(size, basePrice) {
+      currentBuildingAcai = { size, basePrice };
+      document.getElementById('build-title').innerText = `Montar Açaí - ${size} (R$ ${basePrice.toFixed(2)})`;
+      
+      let html = `
+        <div class="option-group">
+          <div class="group-header">Opção da Base</div>
+          <label class="checkbox-item"><input type="radio" name="cupuacu" value="Sem Cupuaçu" checked> Apenas Açaí</label>
+          <label class="checkbox-item"><input type="radio" name="cupuacu" value="Com Cupuaçu"> Açaí com Cupuaçu</label>
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Adicionais Gratuitos <span class="limit-badge" id="addon-count">0 de 5</span></div>
+          ${freeAddonsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="free-addon" value="${item}" onchange="checkLimits('free-addon', 5, 'addon-count')">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Frutas Gratuitas <span class="limit-badge" id="fruit-count">0 de 2</span></div>
+          ${freeFruitsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="free-fruit" value="${item}" onchange="checkLimits('free-fruit', 2, 'fruit-count')">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Caldas</div>
+          ${syrupsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="syrup" value="${item}">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Cobertura</div>
+          ${toppingsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="topping" value="${item}">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Adicionais Pagos (Opcional)</div>
+          ${paidAddonsList.map((item, idx) => `
+            <label class="checkbox-item">
+              <span>${item.name} (+R$ ${item.price.toFixed(2)})</span>
+              <input type="checkbox" name="paid-addon" value="${idx}">
+            </label>
+          `).join('')}
+        </div>
+      `;
+
+      document.getElementById('build-body').innerHTML = html;
+      document.getElementById('build-modal').classList.add('active');
+    }
+
+    // TRAVA DE SELEÇÃO LIMITADA
+    function checkLimits(name, max, badgeId) {
+      const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+      const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+      
+      document.getElementById(badgeId).innerText = `${checked.length} de ${max}`;
+
+      if (checked.length >= max) {
+        checkboxes.forEach(cb => {
+          if (!cb.checked) cb.disabled = true;
+        });
+      } else {
+        checkboxes.forEach(cb => cb.disabled = false);
+      }
+    }
+
+    // SALVAR AÇAÍ NO CARRINHO
+    function addCustomAcaiToCart() {
+      const cupuacu = document.querySelector('input[name="cupuacu"]:checked').value;
+      const freeAddons = Array.from(document.querySelectorAll('input[name="free-addon"]:checked')).map(cb => cb.value);
+      const freeFruits = Array.from(document.querySelectorAll('input[name="free-fruit"]:checked')).map(cb => cb.value);
+      const syrups = Array.from(document.querySelectorAll('input[name="syrup"]:checked')).map(cb => cb.value);
+      const toppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => cb.value);
+      
+      const paidAddonIndexes = Array.from(document.querySelectorAll('input[name="paid-addon"]:checked')).map(cb => parseInt(cb.value));
+      
+      let extraPrice = 0;
+      let paidAddonsNames = [];
+      paidAddonIndexes.forEach(idx => {
+        extraPrice += paidAddonsList[idx].price;
+        paidAddonsNames.push(paidAddonsList[idx].name);
+      });
+
+      const totalItemPrice = currentBuildingAcai.basePrice + extraPrice;
+
+      cart.push({
+        name: `Açaí Montado ${currentBuildingAcai.size}`,
+        price: totalItemPrice,
+        details: [
+          `Base: ${cupuacu}`,
+          freeAddons.length ? `Grátis: ${freeAddons.join(', ')}` : '',
+          freeFruits.length ? `Frutas: ${freeFruits.join(', ')}` : '',
+          syrups.length ? `Caldas: ${syrups.join(', ')}` : '',
+          toppings.length ? `Coberturas: ${toppings.join(', ')}` : '',
+          paidAddonsNames.length ? `Pagos: ${paidAddonsNames.join(', ')}` : ''
+        ].filter(Boolean).join(' | ')
+      });
+
+      closeModal('build-modal');
+      updateCartUI();
+    }
+
+    // MONTAGEM DO FONDUE
+    function openFondueModal(size, basePrice, maxFruits, maxAddons) {
+      currentBuildingFondue = { size, basePrice, maxFruits, maxAddons };
+      document.getElementById('fondue-title').innerText = `Fondue ${size} (R$ ${basePrice.toFixed(2)})`;
+
+      let html = `
+        <div class="option-group">
+          <div class="group-header">Escolha o Chocolate</div>
+          <label class="checkbox-item"><input type="radio" name="chocolate" value="Chocolate Preto" checked> Chocolate Preto</label>
+          <label class="checkbox-item"><input type="radio" name="chocolate" value="Chocolate Branco"> Chocolate Branco</label>
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Frutas <span class="limit-badge" id="fondue-fruit-count">0 de ${maxFruits}</span></div>
+          ${freeFruitsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="fondue-fruit" value="${item}" onchange="checkLimits('fondue-fruit', ${maxFruits}, 'fondue-fruit-count')">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Adicionais <span class="limit-badge" id="fondue-addon-count">0 de ${maxAddons}</span></div>
+          ${freeAddonsList.map(item => `
+            <label class="checkbox-item">
+              <span>${item}</span>
+              <input type="checkbox" name="fondue-addon" value="${item}" onchange="checkLimits('fondue-addon', ${maxAddons}, 'fondue-addon-count')">
+            </label>
+          `).join('')}
+        </div>
+
+        <div class="option-group">
+          <div class="group-header">Adicionais Pagos (Opcional)</div>
+          ${paidAddonsList.map((item, idx) => `
+            <label class="checkbox-item">
+              <span>${item.name} (+R$ ${item.price.toFixed(2)})</span>
+              <input type="checkbox" name="fondue-paid-addon" value="${idx}">
+            </label>
+          `).join('')}
+        </div>
+      `;
+
+      document.getElementById('fondue-body').innerHTML = html;
+      document.getElementById('fondue-modal').classList.add('active');
+    }
+
+    function addFondueToCart() {
+      const chocolate = document.querySelector('input[name="chocolate"]:checked').value;
+      const fruits = Array.from(document.querySelectorAll('input[name="fondue-fruit"]:checked')).map(cb => cb.value);
+      const addons = Array.from(document.querySelectorAll('input[name="fondue-addon"]:checked')).map(cb => cb.value);
+      
+      const paidAddonIndexes = Array.from(document.querySelectorAll('input[name="fondue-paid-addon"]:checked')).map(cb => parseInt(cb.value));
+      
+      let extraPrice = 0;
+      let paidAddonsNames = [];
+      paidAddonIndexes.forEach(idx => {
+        extraPrice += paidAddonsList[idx].price;
+        paidAddonsNames.push(paidAddonsList[idx].name);
+      });
+
+      const totalItemPrice = currentBuildingFondue.basePrice + extraPrice;
+
+      cart.push({
+        name: `Fondue de Frutas ${currentBuildingFondue.size}`,
+        price: totalItemPrice,
+        details: [
+          `Chocolate: ${chocolate}`,
+          fruits.length ? `Frutas: ${fruits.join(', ')}` : '',
+          addons.length ? `Adicionais: ${addons.join(', ')}` : '',
+          paidAddonsNames.length ? `Pagos: ${paidAddonsNames.join(', ')}` : ''
+        ].filter(Boolean).join(' | ')
+      });
+
+      closeModal('fondue-modal');
+      updateCartUI();
+    }
+
+    // ADICIONAR ITEM PRONTO
+    function addReadyItem(name, price) {
+      cart.push({ name, price, details: "Açaí Pronto da Casa" });
+      updateCartUI();
+    }
+
+    // REMOVER ITEM DO CARRINHO
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+      renderCartItems();
+    }
+
+    // ATUALIZAR INTERFACE DO CARRINHO E FRETE
+    function updateCartUI() {
+      const count = cart.length;
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      document.getElementById('cart-count').innerText = `${count} ${count === 1 ? 'item selecionado' : 'itens selecionados'}`;
+      document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
+
+      // Barra de Frete Grátis (R$ 50,00)
+      const target = 50.00;
+      const percentage = Math.min((total / target) * 100, 100);
+      document.getElementById('shipping-progress').style.width = `${percentage}%`;
+
+      if (total >= target) {
+        document.getElementById('shipping-text').innerText = "Parabéns! Você ganhou Entrega Grátis! 🎉";
+      } else {
+        const remaining = target - total;
+        document.getElementById('shipping-text').innerText = `Adicione mais R$ ${remaining.toFixed(2)} para Entrega Grátis!`;
+      }
+    }
+
+    function openCartModal() {
+      if (cart.length === 0) {
+        alert("Seu carrinho está vazio! Escolha algum item para continuar.");
+        return;
+      }
+      renderCartItems();
+      document.getElementById('cart-modal').classList.add('active');
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById('cart-items-list');
+      let total = 0;
+
+      container.innerHTML = cart.map((item, idx) => {
+        total += item.price;
+        return `
+          <div class="cart-item">
+            <div class="cart-item-details">
+              <strong>${item.name}</strong> - R$ ${item.price.toFixed(2)}
+              <div class="cart-item-sub">${item.details}</div>
+            </div>
+            <button onclick="removeFromCart(${idx})" style="color:red; background:none; border:none; cursor:pointer; font-weight:bold; margin-left:10px;">Remover</button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cart-modal-total').innerText = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // MOSTRAR/ESCONDER CAMPOS DE ENDEREÇO
+    function toggleDeliveryFields() {
+      const type = document.getElementById('cust-type').value;
+      const fields = document.getElementById('delivery-fields');
+      if (type === 'Retirada') {
+        fields.style.display = 'none';
+      } else {
+        fields.style.display = 'block';
+      }
+    }
+
+    // ENVIAR PEDIDO FORMATADO VIA WHATSAPP
+    function sendWhatsAppOrder() {
+      const name = document.getElementById('cust-name').value.trim();
+      const type = document.getElementById('cust-type').value;
+      const pay = document.getElementById('cust-pay').value;
+
+      if (!name) {
+        alert("Por favor, digite seu nome.");
+        return;
+      }
+
+      let addressText = "";
+      if (type === 'Entrega') {
+        const street = document.getElementById('cust-street').value.trim();
+        const num = document.getElementById('cust-num').value.trim();
+        const bairro = document.getElementById('cust-bairro').value.trim();
+        const homeType = document.getElementById('cust-home-type').value;
+        const portaria = document.getElementById('cust-portaria').value;
+        const comp = document.getElementById('cust-comp').value.trim();
+        const ref = document.getElementById('cust-ref').value.trim();
+
+        if (!street || !num || !bairro) {
+          alert("Por favor, preencha os campos obrigatórios do endereço (Rua, Número e Bairro).");
+          return;
+        }
+
+        addressText = `\n📍 *Endereço de Entrega:*\n• Rua: ${street}, Nº ${num}\n• Bairro: ${bairro}\n• Tipo: ${homeType} | Portaria: ${portaria}${comp ? '\n• Comp: ' + comp : ''}${ref ? '\n• Ref: ' + ref : ''}\n`;
+      } else {
+        addressText = `\n🏬 *Opção:* Retirada no Local\n`;
+      }
+
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      // FORMATAÇÃO DA MENSAGEM DO WHATSAPP
+      let msg = `*NOVO PEDIDO - FAMOSO AÇAÍ* 🍇\n\n`;
+      msg += `👤 *Cliente:* ${name}\n`;
+      msg += `💳 *Forma de Pagamento:* ${pay}\n`;
+      msg += addressText;
+      msg += `\n🛒 *ITENS DO PEDIDO:*\n`;
+
+      cart.forEach((item, idx) => {
+        msg += `\n*${idx + 1}. ${item.name}* - R$ ${item.price.toFixed(2)}\n`;
+        if (item.details) msg += `   _${item.details}_\n`;
+      });
+
+      msg += `\n💰 *VALOR TOTAL:* R$ ${total.toFixed(2)}`;
+      
+      if (total >= 50.00 && type === 'Entrega') {
+        msg += `\n🎉 *PROMOÇÃO:* Entrega Grátis Garantida!`;
+      } else if (type === 'Entrega') {
+        msg += `\n🛵 *Taxa de entrega:* A combinar via chat`;
+      }
+
+      const phone = "5511951136640";
+      const encodedMsg = encodeURIComponent(msg);
+      window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
